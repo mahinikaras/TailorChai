@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tailor_chai_mobile_app/app_screen.dart';
-import 'package:tailor_chai_mobile_app/splash_screen.dart';
+import 'package:tailor_chai_mobile_app/screens/app_screen.dart';
+import 'package:tailor_chai_mobile_app/screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());

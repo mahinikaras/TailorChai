@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tailor_chai_mobile_app/Constants/color_cons.dart';
 import 'package:tailor_chai_mobile_app/Constants/string_const.dart';
+import 'package:tailor_chai_mobile_app/screens/blog_home_screen.dart';
 
 class AppScreen extends StatefulWidget {
   const AppScreen({Key? key}) : super(key: key);
@@ -11,15 +12,12 @@ class AppScreen extends StatefulWidget {
 
 class _AppScreenState extends State<AppScreen> {
   int _selectedIndex = 0;
-  static const List<Widget> _pages = <Widget>[
+  static List<Widget> _pages = <Widget>[
     Icon(
       Icons.home,
       size: 150,
     ),
-    Icon(
-      Icons.menu_book,
-      size: 150,
-    ),
+    BlogHomeScreen(),
     Icon(
       Icons.shopping_basket,
       size: 150,
@@ -33,7 +31,6 @@ class _AppScreenState extends State<AppScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         title: const Center(
           child: Text(
             StringConst.appName,
