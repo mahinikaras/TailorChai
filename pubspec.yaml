@@ -17,6 +17,9 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   nb_utils: ^4.4.11
+  font_awesome_flutter: ^10.1.0
+  dropdown_button2: ^1.2.2
+  toast: ^0.1.5
 
 dev_dependencies:
   flutter_test:

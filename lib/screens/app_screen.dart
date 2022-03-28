@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tailor_chai_mobile_app/Constants/color_cons.dart';
 import 'package:tailor_chai_mobile_app/Constants/string_const.dart';
+import 'package:tailor_chai_mobile_app/screens/Order_screen.dart';
+import 'package:tailor_chai_mobile_app/screens/about_screen.dart';
 import 'package:tailor_chai_mobile_app/screens/blog_home_screen.dart';
 import 'package:tailor_chai_mobile_app/screens/home_screen.dart';
 
@@ -16,14 +18,8 @@ class _AppScreenState extends State<AppScreen> {
   static List<Widget> _pages = <Widget>[
     HomeScreen(),
     BlogHomeScreen(),
-    Icon(
-      Icons.shopping_basket,
-      size: 150,
-    ),
-    Icon(
-      Icons.info,
-      size: 150,
-    ),
+    OrderScreen(),
+    AboutScreen(),
   ];
   @override
   Widget build(BuildContext context) {
