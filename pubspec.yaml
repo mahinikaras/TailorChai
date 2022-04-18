@@ -20,6 +20,8 @@ dependencies:
   font_awesome_flutter: ^10.1.0
   dropdown_button2: ^1.2.2
   toast: ^0.1.5
+  firebase_core: ^1.14.1
+  cloud_firestore: ^3.1.12
 
 dev_dependencies:
   flutter_test:

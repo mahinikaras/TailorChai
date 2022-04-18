@@ -1,4 +1,4 @@
-package com.example.tailor_chai_mobile_app
+package com.aurchy.tailorchai
 
 import io.flutter.embedding.android.FlutterActivity
 

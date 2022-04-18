@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "675946204574",
+    "project_id": "tailorchai-23d28",
+    "storage_bucket": "tailorchai-23d28.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:675946204574:android:67e9a366dcfd6d8cb45a8f",
+        "android_client_info": {
+          "package_name": "com.aurchy.tailorchai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "675946204574-5cn5c8otck5hh02pp7fblnmt55tskf99.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuPP2ab0SNlgZGNZ9G6DA13VlWbIniYIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "675946204574-5cn5c8otck5hh02pp7fblnmt55tskf99.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

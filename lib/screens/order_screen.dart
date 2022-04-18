@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:tailor_chai_mobile_app/Constants/color_cons.dart';
@@ -11,6 +13,60 @@ class OrderScreen extends StatefulWidget {
 }
 
 class _OrderScreenState extends State<OrderScreen> {
+  late CollectionReference orders;
+  @override
+  void initState() {
+    super.initState();
+    initializeFirebase();
+  }
+
+  void initializeFirebase() async {
+    await Firebase.initializeApp();
+    orders = FirebaseFirestore.instance.collection("Orders");
+  }
+
+  String kamijBodyValue = "";
+  String kamijLengthValue = "";
+  String kamijSleeveValue = "";
+  String kamijWaistValue = "";
+  String pantLengthValue = "";
+  String pantStyleValue = "";
+
+  void StoreDropDownValue(String fieldName, String value) {
+    switch (fieldName) {
+      case "kamijBodyValue":
+        {
+          kamijBodyValue = value;
+        }
+        break;
+      case "kamijLengthValue":
+        {
+          kamijLengthValue = value;
+        }
+        break;
+      case "kamijSleeveValue":
+        {
+          kamijSleeveValue = value;
+        }
+        break;
+      case "kamijWaistValue":
+        {
+          kamijWaistValue = value;
+        }
+        break;
+      case "pantLengthValue":
+        {
+          pantLengthValue = value;
+        }
+        break;
+      case "pantStyleValue":
+        {
+          pantStyleValue = value;
+        }
+        break;
+    }
+  }
+
   var body = ['Small(34)', 'Medium(36)', 'Large(40)', 'XL(44)', 'XXL(48)'];
   var sleeve = [
     'Short(4)',
@@ -98,7 +154,9 @@ class _OrderScreenState extends State<OrderScreen> {
               ItemDropDown(
                 items: body,
                 hintText: 'BODY (Inches)',
-                errorText: "Please select sleeve",
+                errorText: "Please select BODY",
+                StoreDropDownValue: StoreDropDownValue,
+                dropDownName: "kamijBodyValue",
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.03,
@@ -107,6 +165,8 @@ class _OrderScreenState extends State<OrderScreen> {
                 items: body,
                 hintText: 'SLEEVE (Inches)',
                 errorText: "Please select sleeve",
+                StoreDropDownValue: StoreDropDownValue,
+                dropDownName: "kamijSleeveValue",
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.03,
@@ -122,6 +182,8 @@ class _OrderScreenState extends State<OrderScreen> {
                 items: waist,
                 hintText: 'WAIST (Inches)',
                 errorText: "Please select waist",
+                StoreDropDownValue: StoreDropDownValue,
+                dropDownName: "kamijWaistValue",
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.03,
@@ -130,6 +192,8 @@ class _OrderScreenState extends State<OrderScreen> {
                 items: kamijLength,
                 hintText: 'LENGTH (Inches)',
                 errorText: "Please select length",
+                StoreDropDownValue: StoreDropDownValue,
+                dropDownName: "kamijLengthValue",
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.03,
@@ -166,6 +230,8 @@ class _OrderScreenState extends State<OrderScreen> {
                 items: pantLength,
                 hintText: 'LENGTH (Inches)',
                 errorText: "Please select sleeve",
+                StoreDropDownValue: StoreDropDownValue,
+                dropDownName: "pantLengthValue",
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.03,
@@ -174,6 +240,8 @@ class _OrderScreenState extends State<OrderScreen> {
                 items: style,
                 hintText: 'STYLE',
                 errorText: "Please select sleeve",
+                StoreDropDownValue: StoreDropDownValue,
+                dropDownName: "pantStyleValue",
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.03,
@@ -189,6 +257,15 @@ class _OrderScreenState extends State<OrderScreen> {
                 backgroundColor: Color.fromARGB(255, 79, 175, 55),
                 gravity: ToastGravity.BOTTOM,
               );
+
+              orders.add({
+                "kamijBody": kamijBodyValue,
+                "kamijLength": kamijLengthValue,
+                "kamijSleeve": kamijSleeveValue,
+                "kamijWaist": kamijWaistValue,
+                "pantLength": pantLengthValue,
+                "pantStyle": pantStyleValue,
+              });
             },
             child: Text(
               "Place Order",
@@ -210,12 +287,16 @@ class ItemDropDown extends StatefulWidget {
   List<String> items;
   String hintText;
   String errorText;
-  ItemDropDown(
-      {Key? key,
-      required this.items,
-      required this.hintText,
-      required this.errorText})
-      : super(key: key);
+  Function StoreDropDownValue;
+  String dropDownName;
+  ItemDropDown({
+    Key? key,
+    required this.items,
+    required this.hintText,
+    required this.errorText,
+    required this.StoreDropDownValue,
+    required this.dropDownName,
+  }) : super(key: key);
 
   @override
   State<ItemDropDown> createState() => _ItemDropDownState();
@@ -270,10 +351,12 @@ class _ItemDropDownState extends State<ItemDropDown> {
           }
         },
         onChanged: (value) {
-          //Do something when changing the item if you want.
+          print("onChnaged called : $value");
+          widget.StoreDropDownValue(widget.dropDownName, value);
         },
         onSaved: (value) {
           selectedValue = value.toString();
+          print("onSave Called : $value");
         },
       ),
     );
